@@ -1,0 +1,41 @@
+.faq h2 {
+    font-size: 2.2rem;
+    color: #0d6efd;
+}
+
+.accordion-item {
+    border: none;
+    background-color: #fff;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.accordion-button {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    color: #212529;
+    border: none;
+    border-radius: 0;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #e9f0ff;
+    color: #0d6efd;
+}
+
+.accordion-body {
+    font-size: 1rem;
+    color: #495057;
+    padding: 1rem 1.5rem;
+    background-color: #fdfdfd;
+}

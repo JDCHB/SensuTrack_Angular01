@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+
+* {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.carousel-item img {
+    height: 500px;
+    /* Ajusta la altura de las imágenes */
+    object-fit: contain;
+    /* Asegura que la imagen se vea completa sin recortes */
+    width: 100%;
+    /* Asegura que la imagen ocupe todo el ancho disponible */
+    transition: opacity 0.5s ease-in-out;
+    /* Suaviza la transición de imagen */
+}
+
+.carousel-item {
+    position: relative;
+    /* Necesario para la leyenda */
+}
+
+.carousel-caption {
+    bottom: 30px;
+    /* Ajustamos la posición de la leyenda */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    /* Fondo oscuro semitransparente */
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    /* Bordes redondeados */
+    z-index: 2;
+    text-align: center;
+}
+
+.carousel-caption h5 {
+    font-size: 30px;
+    /* Tamaño de fuente más pequeño */
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.carousel-caption p {
+    width: 80%;
+    /* Ajusta el ancho */
+    margin: 10px auto;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Mejoras para la responsividad */
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 300px;
+        /* Ajusta la altura en dispositivos móviles */
+    }
+
+    .carousel-caption h5 {
+        font-size: 24px;
+    }
+
+    .carousel-caption p {
+        font-size: 14px;
+    }
+}
+
+/* Estilo para los controles del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fondo oscuro para los iconos */
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    top: 50%;
+    transform: translateY(-50%);
+    /* Centra los controles verticalmente */
+}
+
+.carousel-control-prev-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.carousel-control-next-icon {
+    width: 50px;
+    height: 50px;
+}

@@ -1,0 +1,147 @@
+/* Estilos generales del banner */
+.banner {
+    background-color: #93927c;
+    /* Fondo oscuro */
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    color: #006aff;
+    /* Color del texto (Naranja brillante) */
+}
+
+.banner p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Botón destacado */
+.btn-cta {
+    border-color: #006aff;
+    font-size: 1.2rem;
+    padding: 10px 25px;
+    border-radius: 30px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    transition:
+        background-color 0.3s,
+        transform 0.3s ease;
+}
+
+.btn-cta:hover {
+    background-color: #006aff;
+    transform: translateY(-5px);
+}
+
+.banner-image {
+    background-image: url("/logo.jpg");
+    /* Imagen de fondo */
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    /* Efecto parallax */
+    z-index: -1;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .banner h2 {
+        font-size: 2rem;
+    }
+
+    .banner p {
+        font-size: 1rem;
+    }
+}
+
+/* Sección de Beneficios */
+.benefits {
+    background-color: #f4f7fa;
+    /* Fondo claro */
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.benefit-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    /* Efecto de flotado */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Iconos con fondo de gradiente */
+.icon-container {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    font-size: 2.5rem;
+}
+
+.bg-gradient-1 {
+    background: linear-gradient(135deg, #ff8c00, #ffb74d);
+    /* Naranja */
+}
+
+.bg-gradient-2 {
+    background: linear-gradient(135deg, #28a745, #5cb85c);
+    /* Verde */
+}
+
+.bg-gradient-3 {
+    background: linear-gradient(135deg, #007bff, #33b5e5);
+    /* Azul */
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 50px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .benefits {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+}

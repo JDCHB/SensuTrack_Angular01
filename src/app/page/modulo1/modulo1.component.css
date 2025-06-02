@@ -1,0 +1,136 @@
+.card {
+    background-color: #ffe9d6;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card .form-label {
+    color: #0079fa;
+}
+
+.btn-primary {
+    background-color: #0079fa;
+    border-color: #0079fa;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.btn-primary:hover {
+    background-color: #005f89;
+    border-color: #005f89;
+}
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0079fa;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+.loader-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.loader-text {
+    display: flex;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    color: #007bff;
+    animation: fadeIn 1.5s infinite alternate;
+}
+
+.loader-text span {
+    animation: bounce 1.5s infinite ease-in-out;
+    animation-delay: calc(0.1s * var(--i));
+}
+
+.loader-text span:nth-child(n) {
+    --i: 1;
+}
+
+.loader-text span:nth-child(2) {
+    --i: 2;
+}
+
+.loader-text span:nth-child(3) {
+    --i: 3;
+}
+
+.loader-text span:nth-child(4) {
+    --i: 4;
+}
+
+.loader-text span:nth-child(5) {
+    --i: 5;
+}
+
+.loader-text span:nth-child(6) {
+    --i: 6;
+}
+
+.loader-text span:nth-child(7) {
+    --i: 7;
+}
+
+.loader-text span:nth-child(8) {
+    --i: 8;
+}
+
+.loader-text span:nth-child(9) {
+    --i: 9;
+}
+
+.loader-text span:nth-child(10) {
+    --i: 10;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translateY(-15px);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive optimización para celulares */
+@media (max-width: 576px) {
+    .card {
+        padding: 1.5rem;
+    }
+
+    .loader-text {
+        font-size: 28px;
+        letter-spacing: 3px;
+    }
+}

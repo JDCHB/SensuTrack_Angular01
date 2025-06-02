@@ -1,0 +1,82 @@
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+input,
+select,
+button {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus,
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px 3px #5a9bff;
+}
+
+button {
+    background-color: #5a9bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #4b86e3;
+}
+
+button:active {
+    background-color: #3e75c7;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: center;
+}
+
+th {
+    background-color: #f4f5f7;
+    color: #333;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #e2e6ea;
+}
+
+.progress {
+    height: 5px;
+    margin-top: 20px;
+}
+
+#MostrarReporte {
+    background-color: #f1f3f7;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}

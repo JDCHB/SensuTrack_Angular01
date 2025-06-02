@@ -1,0 +1,65 @@
+/* Navbar Styling */
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra suave para el navbar */
+    border-radius: 10px;
+    /* Bordes redondeados */
+}
+
+.navbar-brand img {
+    border-radius: 50%;
+    /* Logo redondeado */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra sutil al logo */
+}
+
+.navbar-nav .nav-link {
+    transition: all 0.3s ease;
+    /* Efecto de transición suave en los enlaces */
+    padding: 8px 20px;
+    /* Espaciado adecuado entre los enlaces */
+    font-size: 16px;
+    /* Tamaño de fuente moderado */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #0079fa !important;
+    /* Color de hover */
+    text-decoration: underline;
+    /* Subrayado en hover */
+    transform: scale(1.1);
+    /* Efecto de agrandado en hover */
+}
+
+.navbar-toggler {
+    border: 1px solid #0079fa;
+    /* Contorno anaranjado para el botón */
+    border-radius: 5px;
+}
+
+.navbar-toggler-icon {
+    background-color: #0079fa;
+    /* Icono anaranjado para el menú */
+}
+
+.nav-item i {
+    margin-right: 8px;
+    /* Espaciado entre el icono y el texto */
+}
+
+/* Estilos para la responsividad */
+@media (max-width: 991px) {
+    .navbar-brand {
+        text-align: center;
+        /* Centrar el logo en pantallas pequeñas */
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 15px;
+        /* Espaciado vertical entre los elementos en móviles */
+    }
+}

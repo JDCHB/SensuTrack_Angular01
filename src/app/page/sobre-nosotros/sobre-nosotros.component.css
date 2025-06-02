@@ -1,0 +1,21 @@
+.about-us {
+    max-width: 900px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.about-us h2 {
+    font-size: 1.75rem;
+    /* Border-left destacado para títulos */
+}
+
+.about-us p {
+    line-height: 1.6;
+}
+
+.about-us a:hover {
+    color: #0a58ca;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
