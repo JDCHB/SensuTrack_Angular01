@@ -11,7 +11,7 @@ import { Dashboard } from './page/dashboard/dashboard';
 import { RegistroDiscapacitados } from './page/registro-discapacitados/registro-discapacitados';
 import { GPS } from './page/gps/gps';
 import { GestionUsuarios } from './page/gestion-usuarios/gestion-usuarios';
-
+import { RegistroUser } from './page/registro-user/registro-user';
 
 
 export const routes: Routes = [
@@ -26,6 +26,7 @@ export const routes: Routes = [
     { path: 'RegistroDiscapacitados', component: RegistroDiscapacitados },
     { path: 'GPS', component: GPS },
     { path: 'GestionUsuarios', component: GestionUsuarios },
+    { path: 'FormularioRegistro', component: RegistroUser },
     { path: '**', component: PaginaError }
 
 ];

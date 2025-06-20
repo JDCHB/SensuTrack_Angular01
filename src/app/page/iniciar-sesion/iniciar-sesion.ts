@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Navbar } from '../../components/navbar/navbar';
 import { Footer } from '../../components/footer/footer';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ import { FormGroup, ReactiveFormsModule, Validators, FormBuilder } from '@angula
 @Component({
   selector: 'app-iniciar-sesion',
   imports: [Navbar, Footer, FormsModule,
-    CommonModule, ReactiveFormsModule
+    CommonModule, ReactiveFormsModule, RouterLink
   ],
   templateUrl: './iniciar-sesion.html',
   styleUrl: './iniciar-sesion.css'

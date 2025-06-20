@@ -1,0 +1,58 @@
+Bienvenido a Angular estimados lectores: 
+
+
+########CREACION DE ANGULAR#########################################################
+
+1.  Instalar node
+
+
+------------------------------------Desde el cmd o visual studio--------------------------------------------------------------
+2.  npm install -g @angular/cli     (Instalar cli de angular)
+3.  ng new Nombre del proyecto      (Crear proyecto)
+4. npm start                        (Ejecuta lo que esta en "start" en el archivo package.json que en este caso contiene "ng serve")
+
+
+-----------------------------------Abres el proyecto desde visual--------------------------------------------------------------
+5. Ng g c nombre_del_componente      <--USAR CUALQUIERA DE LOS DOS COMANDO-->   ng generate component nombre_del_componente 
+
+6. Colocar en app.routes.ts: 
+import { Routes } from '@angular/router';
+import {Componente1Component} from './componente1/componente1.component';
+
+export const routes: Routes = [ 
+    {path: '', component: Componente1Component}, 
+    {path: '**', redirectTo: '', pathMatch: 'full'}
+        
+];
+
+7. ✅ ¿Cómo proteger rutas?
+Crea un guard que revise si hay un usuario en localStorage:
+
+ng generate guard auth 
+
+Luego en el guard:
+
+canActivate(): boolean {
+  return !!localStorage.getItem('usuario');
+}
+
+Y protégelo en tu app-routing.module.ts.
+
+
+------------------------------------Para visualizar la pagina-------------------------------------------------------------------
+Para ver la pagina:
+-ng serve
+-ng serve --host 0.0.0.0 --port 4200
+
+
+
+Pasar esta paginas:
+Inicio 
+Acerca de
+Salud y bienestar
+Ubicación
+Registrar
+(Tienen navbar index y footer)
+
+
+Iniciar sesión

@@ -1,0 +1,259 @@
+<app-navbar></app-navbar>
+
+<section class="vh-100 pt-5" style="background-color: #eee; padding-bottom: 60%;">
+    <div class="wrapper d-flex align-items-center justify-content-center vh-100">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">FORMULARIO DE REGISTRO</p>
+
+                                    <form [formGroup]="RegisForm" (ngSubmit)="onSubmit()" class="mx-1 mx-md-4">
+
+                                        <!-- Nombre -->
+                                        <div class="mb-4 d-flex flex-column">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-person fa-lg me-3 fa-fw"></i>
+                                                <input formControlName="nombre" type="text" class="form-control"
+                                                    placeholder="Nombre" />
+                                            </div>
+                                            <div *ngIf="RegisForm.get('nombre')?.invalid && RegisForm.get('nombre')?.touched"
+                                                class="text-danger small">
+                                                El nombre es obligatorio.
+                                            </div>
+                                        </div>
+
+                                        <!-- Apellido -->
+                                        <div class="mb-4 d-flex flex-column">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-person fa-lg me-3 fa-fw"></i>
+                                                <input formControlName="apellido" type="text" class="form-control"
+                                                    placeholder="Apellido" />
+                                            </div>
+                                            <div *ngIf="RegisForm.get('apellido')?.invalid && RegisForm.get('apellido')?.touched"
+                                                class="text-danger small">
+                                                El apellido es obligatorio.
+                                            </div>
+                                        </div>
+
+                                        <!-- Documento -->
+                                        <div class="mb-4 d-flex flex-column">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-card-list fa-lg me-3 fa-fw"></i>
+                                                <input formControlName="documento" type="text" class="form-control"
+                                                    placeholder="Documento" />
+                                            </div>
+                                            <div *ngIf="RegisForm.get('documento')?.invalid && RegisForm.get('documento')?.touched"
+                                                class="text-danger small">
+                                                El documento es obligatorio.
+                                            </div>
+                                        </div>
+
+                                        <!-- Teléfono -->
+                                        <div class="mb-4 d-flex flex-column">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-telephone fa-lg me-3 fa-fw"></i>
+                                                <input formControlName="telefono" type="text" class="form-control"
+                                                    placeholder="Teléfono" />
+                                            </div>
+                                            <div *ngIf="RegisForm.get('telefono')?.invalid && RegisForm.get('telefono')?.touched"
+                                                class="text-danger small">
+                                                <div *ngIf="RegisForm.get('telefono')?.errors?.['required']">El teléfono
+                                                    es obligatorio.</div>
+                                                <div *ngIf="RegisForm.get('telefono')?.errors?.['pattern']">Solo se
+                                                    permiten números.</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Email -->
+                                        <div class="mb-4 d-flex flex-column">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-envelope fa-lg me-3 fa-fw"></i>
+                                                <input formControlName="email" type="email" class="form-control"
+                                                    placeholder="Correo Electrónico" />
+                                            </div>
+                                            <div *ngIf="RegisForm.get('email')?.invalid && RegisForm.get('email')?.touched"
+                                                class="text-danger small">
+                                                <div *ngIf="RegisForm.get('email')?.errors?.['required']">El correo es
+                                                    obligatorio.</div>
+                                                <div *ngIf="RegisForm.get('email')?.errors?.['email']">Debe ser un
+                                                    correo válido.</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Contraseña -->
+                                        <div class="mb-4 d-flex flex-column">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-lock fa-lg me-3 fa-fw"></i>
+                                                <input formControlName="password" type="password" class="form-control"
+                                                    placeholder="Contraseña" />
+                                            </div>
+                                            <div *ngIf="RegisForm.get('password')?.invalid && RegisForm.get('password')?.touched"
+                                                class="text-danger small">
+                                                La contraseña es obligatoria.
+                                            </div>
+                                        </div>
+
+                                        <!-- Confirmar contraseña -->
+                                        <div class="mb-4 d-flex flex-column">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-lock fa-lg me-3 fa-fw"></i>
+                                                <input formControlName="confirmarPassword" type="password"
+                                                    class="form-control" placeholder="Confirmar Contraseña" />
+                                            </div>
+                                            <div *ngIf="RegisForm.get('confirmarPassword')?.invalid && RegisForm.get('confirmarPassword')?.touched"
+                                                class="text-danger small">
+                                                Debes confirmar la contraseña.
+                                            </div>
+                                        </div>
+
+                                        <!-- CAPTCHA -->
+                                        <div class="d-flex justify-content-center mb-4">
+                                            <div class="g-recaptcha" data-sitekey="TU_SITE_KEY"></div>
+                                        </div>
+
+                                        <!-- Términos -->
+                                        <div class="form-check d-flex justify-content-center mb-2">
+                                            <input class="form-check-input me-2" type="checkbox"
+                                                formControlName="terminos" />
+                                            <label class="form-check-label">
+                                                Acepto los términos y condiciones en:
+                                                <button type="button" class="btn btn-link p-0" data-bs-toggle="modal"
+                                                    data-bs-target="#terminosYcondiciones">
+                                                    Términos y condiciones
+                                                </button>
+                                            </label>
+                                        </div>
+
+                                        <div *ngIf="RegisForm.get('terminos')?.invalid && RegisForm.get('terminos')?.touched"
+                                            class="text-danger text-center small mb-3">
+                                            Debes aceptar los términos.
+                                        </div>
+
+                                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                            <button type="submit" class="btn btn-primary btn-lg"
+                                                [disabled]="RegisForm.invalid">
+                                                Registrarse
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                        class="img-fluid" alt="Imagen de registro" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="terminosYcondiciones" tabindex="-1" aria-labelledby="terminosYcondicionesLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content shadow-lg border-0 rounded-4">
+                <div class="modal-header bg-primary text-white rounded-top-4">
+                    <h5 class="modal-title fw-bold" id="terminosYcondicionesLabel">
+                        <i class="bi bi-file-earmark-text-fill me-2"></i> Términos y Condiciones de SensuTrack
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body px-4 py-3">
+                    <p class="text-muted mb-2">
+                        <strong>Fecha de entrada en vigor:</strong> 18/03/2025
+                    </p>
+                    <p>
+                        Bienvenido a <strong>SensuTrack</strong>. Estos Términos y Condiciones establecen las reglas y
+                        regulaciones para el uso de nuestra plataforma, que permite el monitoreo y gestión de personas
+                        ciegas mediante tecnología GPS.
+                    </p>
+                    <p>
+                        Al acceder y utilizar SensuTrack, aceptas cumplir con estos términos. Si no estás de acuerdo con
+                        alguna parte, te recomendamos no utilizar nuestros servicios.
+                    </p>
+
+                    <!-- Secciones -->
+                    <div class="mb-4">
+                        <h6 class="text-primary fw-bold mt-4"><i class="bi bi-check-circle-fill me-2"></i>1. Uso del
+                            Servicio</h6>
+                        <ul class="list-unstyled ps-3">
+                            <li>✅ SensuTrack facilita el monitoreo de personas con discapacidad visual mediante
+                                dispositivos GPS.</li>
+                            <li>✅ El usuario debe proporcionar información precisa y actualizada.</li>
+                            <li>✅ El acceso puede estar restringido a usuarios verificados.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="text-primary fw-bold"><i class="bi bi-person-fill-add me-2"></i>2. Registro y Cuentas
+                        </h6>
+                        <ul class="list-unstyled ps-3">
+                            <li>📌 Puede requerirse crear una cuenta con datos válidos.</li>
+                            <li>📌 Eres responsable de proteger tus credenciales.</li>
+                            <li>📌 Podemos suspender cuentas que incumplan los términos.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="text-primary fw-bold"><i class="bi bi-shield-lock-fill me-2"></i>3. Privacidad y
+                            Protección de Datos</h6>
+                        <ul class="list-unstyled ps-3">
+                            <li>🔒 Recopilamos datos de ubicación con consentimiento.</li>
+                            <li>🔒 No compartimos información personal sin autorización, salvo por obligación legal.
+                            </li>
+                            <li>🔒 Consulta nuestra <strong>Política de Privacidad</strong> para más detalles.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="text-primary fw-bold"><i class="bi bi-exclamation-triangle-fill me-2"></i>4.
+                            Responsabilidades y Limitaciones</h6>
+                        <ul class="list-unstyled ps-3">
+                            <li>⚠️ No garantizamos disponibilidad permanente del servicio.</li>
+                            <li>⚠️ No nos hacemos responsables de fallos externos (GPS, conexión).</li>
+                            <li>⚠️ No respondemos por el uso indebido de la información.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="text-primary fw-bold"><i class="bi bi-arrow-repeat me-2"></i>5. Modificaciones y
+                            Terminación</h6>
+                        <ul class="list-unstyled ps-3">
+                            <li>🔄 Podemos actualizar estos términos cuando sea necesario, notificando cambios
+                                importantes.</li>
+                            <li>🔄 Nos reservamos el derecho de suspender servicios por incumplimiento.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h6 class="text-primary fw-bold"><i class="bi bi-envelope-fill me-2"></i>6. Contacto</h6>
+                        <p>
+                            Si tienes preguntas, contáctanos en:
+                            <strong class="text-primary">SensuTrack&#64;gmail.com</strong> o desde el apartado de
+                            contacto
+                            en la página.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-light rounded-bottom-4">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        <i class="bi bi-check-circle me-1"></i> Aceptar y Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<app-footer></app-footer>
