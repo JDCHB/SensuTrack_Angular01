@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="contact-section bg-light p-5 rounded shadow-sm">
+                <h2 class="mb-3">👨‍🦯 Formulario de Contacto 👨‍🦯‍➡️</h2>
+                <p class="mb-4">
+                    ¡Cuéntanos cómo podemos ayudarte a mejorar la movilidad y seguridad de las personas ciegas! (❁´◡`❁)
+                </p>
+                <form action="https://formsubmit.co/pettrackerof@gmail.com" method="POST" novalidate>
+                    <div class="form-group mb-4">
+                        <label for="name" class="form-label">
+                            <i class="fa-solid fa-user me-2 text-primary"></i> Nombre y Apellido
+                        </label>
+                        <input type="text" id="name" class="form-control" required placeholder="Nombre y apellido"
+                            name="name" />
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="email" class="form-label">
+                            <i class="fa-solid fa-envelope me-2 text-primary"></i> Correo electrónico
+                        </label>
+                        <input type="email" id="email" class="form-control" required placeholder="Correo electrónico"
+                            name="email" />
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="message" class="form-label">
+                            <i class="fa-solid fa-pen-to-square me-2 text-primary"></i> Tu mensaje
+                        </label>
+                        <textarea id="message" cols="30" rows="6" class="form-control" placeholder="Escribe tu mensaje"
+                            name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-submit shadow-sm w-100">
+                        🦮 Enviar mensaje 🦮
+                    </button>
+
+                    <input type="hidden" name="_next" value="https://sensutrack-front.onrender.com/" />
+                    <input type="hidden" name="_captcha" value="true" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

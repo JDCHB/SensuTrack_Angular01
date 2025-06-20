@@ -1,0 +1,12 @@
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+ul li {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}

@@ -1,30 +1,31 @@
 import { Routes } from '@angular/router';
-import { InicioComponent } from './page/inicio/inicio.component';
-import { SobreNosotrosComponent } from './page/sobre-nosotros/sobre-nosotros.component';
-import { PreguntasFrecuentesComponent } from './page/preguntas-frecuentes/preguntas-frecuentes.component';
-import { ContactenosComponent } from './page/contactenos/contactenos.component';
-import { PaginaErrorComponent } from './components/pagina-error/pagina-error.component';
-import { ReportesComponent } from './page/reportes/reportes.component';
-import { UsuarioComponent } from './page/usuario/usuario.component';
-import { Modulo1Component } from './page/modulo1/modulo1.component';
-import { DashboardComponent } from './page/dashboard/dashboard.component';
-import { InicioSesionComponent } from './page/inicio-sesion/inicio-sesion.component';
-import { GestionUsuarioComponent } from './page/gestion-usuario/gestion-usuario.component';
-import { Modulo2Component } from './page/modulo2/modulo2.component';
+import { PaginaError } from './components/pagina-error/pagina-error';
+import { Inicio } from './page/inicio/inicio';
+import { Contactenos } from './page/contactenos/contactenos';
+import { PreguntasFrecuentes } from './page/preguntas-frecuentes/preguntas-frecuentes';
+import { SobreNosotros } from './page/sobre-nosotros/sobre-nosotros';
+import { IniciarSesion } from './page/iniciar-sesion/iniciar-sesion';
+import { Usuario } from './page/usuario/usuario';
+import { Reportes } from './page/reportes/reportes';
+import { Dashboard } from './page/dashboard/dashboard';
+import { RegistroDiscapacitados } from './page/registro-discapacitados/registro-discapacitados';
+import { GPS } from './page/gps/gps';
+import { GestionUsuarios } from './page/gestion-usuarios/gestion-usuarios';
+
+
 
 export const routes: Routes = [
-    { path: '', component: InicioComponent },
-    { path: 'sobre-nosotros', component: SobreNosotrosComponent },
-    { path: 'preguntas-frecuentes', component: PreguntasFrecuentesComponent },
-    { path: 'contactenos', component: ContactenosComponent },
-    { path: 'reportes', component: ReportesComponent },
-    { path: 'usuario', component: UsuarioComponent },
-    { path: 'modulo1', component: Modulo1Component },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'iniciosesion', component: InicioSesionComponent },
-    { path: 'gestionUsu', component: GestionUsuarioComponent },
-    { path: 'modulo2', component: Modulo2Component },
-    { path: '**', component: PaginaErrorComponent }
+    { path: '', component: Inicio },
+    { path: 'preguntas-frecuentes', component: PreguntasFrecuentes },
+    { path: 'contactenos', component: Contactenos },
+    { path: 'sobre-nosotros', component: SobreNosotros },
+    { path: 'Iniciar-Sesion', component: IniciarSesion },
+    { path: 'usuario', component: Usuario },
+    { path: 'reportes', component: Reportes },
+    { path: 'dashboard', component: Dashboard },
+    { path: 'RegistroDiscapacitados', component: RegistroDiscapacitados },
+    { path: 'GPS', component: GPS },
+    { path: 'GestionUsuarios', component: GestionUsuarios },
+    { path: '**', component: PaginaError }
+
 ];
-
-

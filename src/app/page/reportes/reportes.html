@@ -1,0 +1,39 @@
+<app-navbar-usuario></app-navbar-usuario>
+<div class="container mt-5 mb-5">
+
+    <!-- Card con fondo suave -->
+    <div class="card shadow rounded-4 bg-light p-4">
+        <div class="text-center mb-4">
+            <h3 class="fw-bold text-primary">📊 Reportes</h3>
+        </div>
+        <div class="row mb-4">
+            <div class="col-12 col-md-6 offset-md-3">
+                <label for="opcion" class="form-label fw-semibold">Tipo de reporte:</label>
+                <select class="form-select form-select-lg" id="opcion" required>
+                    <option value="1">Discapacitados</option>
+                    <option value="2">Usuarios</option>
+                    <option value="3">Otro</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <label for="desde_ciegos" class="form-label fw-semibold">Desde:</label>
+                <input type="date" id="desde_ciegos" class="form-control form-control-lg" />
+            </div>
+            <div class="col-md-6">
+                <label for="hasta_ciegos" class="form-label fw-semibold">Hasta:</label>
+                <input type="date" id="hasta_ciegos" class="form-control form-control-lg" />
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary btn-lg px-4">
+                <i class="bi bi-file-earmark-text-fill me-2"></i>Generar Reporte
+            </button>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

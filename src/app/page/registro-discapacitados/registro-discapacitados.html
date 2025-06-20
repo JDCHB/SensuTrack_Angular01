@@ -1,0 +1,63 @@
+<app-navbar-usuario></app-navbar-usuario>
+
+<main class="container py-5" style="margin-bottom: 50px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card shadow-lg p-4 rounded bg-light">
+                <div class="text-center mb-4">
+                    <i class="bi bi-paw-fill text-primary" style="font-size: 48px;"></i>
+                    <h3 class="text-primary mt-3 fw-bold">Registrar Discapacitado</h3>
+                    <p class="text-muted">Completa los detalles del formulario.</p>
+                </div>
+
+                <form (submit)="registrar($event)">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label text-primary fw-semibold">
+                            Nombre del Discapacitado
+                        </label>
+                        <input type="text" class="form-control shadow-sm" id="nombre" [(ngModel)]="nombre" name="nombre"
+                            placeholder="Nombre" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="genero" class="form-label text-primary fw-semibold">
+                            Género
+                        </label>
+                        <select class="form-select shadow-sm" id="genero" [(ngModel)]="genero" name="genero" required>
+                            <option value="" disabled selected>Seleccionar género</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tipo_mascota" class="form-label text-primary fw-semibold">
+                            Tipo de Ceguera
+                        </label>
+                        <select class="form-select shadow-sm" id="tipo_mascota" [(ngModel)]="tipoCeguera"
+                            name="tipoCeguera" required>
+                            <option value="" disabled selected>Seleccione el tipo de ceguera</option>
+                            <option value="Ceguera Total">Ceguera Total</option>
+                            <option value="Ceguera Parcial">Ceguera Parcial</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mt-4 shadow-sm rounded-pill">
+                        🐶 Registrar 🐱
+                    </button>
+                </form>
+
+                <!-- @if para mostrar los datos registrados -->
+                @if (enviado) {
+                <div class="alert alert-success mt-4">
+                    <p><strong>Nombre:</strong> {{ nombre }}</p>
+                    <p><strong>Género:</strong> {{ genero }}</p>
+                    <p><strong>Tipo de ceguera:</strong> {{ tipoCeguera }}</p>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</main>
+
+<app-footer></app-footer>

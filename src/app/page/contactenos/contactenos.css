@@ -1,0 +1,70 @@
+.contact-section {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.contact-section h2 {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #006aff;
+    text-align: center;
+}
+
+.contact-section p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    color: #006aff;
+}
+
+.form-control {
+    width: 100%;
+    border-radius: 12px;
+    padding: 15px 20px;
+    border: 2px solid #ddd;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    resize: vertical;
+}
+
+.form-control:focus {
+    border-color: #006aff;
+    box-shadow: 0 0 8px rgba(0, 106, 255, 0.3);
+    outline: none;
+}
+
+.btn-submit {
+    background-color: #0079fa;
+    border-color: #0079fa;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 15px 0;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-submit:hover,
+.btn-submit:focus {
+    background-color: #005f89;
+    border-color: #005f89;
+    box-shadow: 0 4px 12px rgba(0, 95, 137, 0.5);
+    outline: none;
+}
+
+@media (max-width: 767px) {
+    .contact-section {
+        margin-top: 5%;
+        padding: 3rem 1.5rem;
+    }
+}

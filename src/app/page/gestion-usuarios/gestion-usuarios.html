@@ -1,0 +1,61 @@
+<app-navbar-usuario></app-navbar-usuario>
+
+<div id="Mostrarusuario">
+    <div class="container py-4">
+        <h2 class="mb-4 text-center">USUARIOS</h2>
+
+        <div *ngIf="loading" class="row g-2 justify-content-center">
+            <p class="text-center col-12 col-md-4">Cargando datos...</p>
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <div *ngIf="error" class="text-danger text-center">
+            Error: {{ error }}
+        </div>
+
+        <div *ngIf="!loading && !error" class="overflow-x-auto">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Documento</th>
+                        <th>Teléfono</th>
+                        <th>Estado</th>
+                        <th>Opción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let todo of todos">
+                        <td>{{ todo.email }}</td>
+                        <td>{{ todo.nombre }}</td>
+                        <td>{{ todo.apellido }}</td>
+                        <td>{{ todo.documento }}</td>
+                        <td>{{ todo.telefono }}</td>
+                        <td>
+                            <span [class.text-success]="todo.estado" [class.text-danger]="!todo.estado">
+                                {{ todo.estado ? 'Activo' : 'Desactivado' }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-info me-1" (click)="editar(todo.id)">
+                                <i class="bi bi-pencil"></i> Editar
+                            </button>
+                            <button *ngIf="todo.estado" class="btn btn-danger" (click)="desactivar(todo.id)">
+                                <i class="bi bi-lock"></i> Desactivar
+                            </button>
+                            <button *ngIf="!todo.estado" class="btn btn-success" (click)="activar(todo.id)">
+                                <i class="bi bi-unlock"></i> Activar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
