@@ -50,8 +50,8 @@
                 <!-- @if para mostrar los datos registrados -->
                 @if (enviado) {
                 <div class="alert alert-success mt-4">
-                    <p><strong>Nombre:</strong> {{ nombre }}</p>
-                    <p><strong>Género:</strong> {{ genero }}</p>
+                    <p><strong>Nombre:</strong> {{ nombre|titlecase }}</p>
+                    <p><strong>Género:</strong> {{ genero| uppercase}}</p>
                     <p><strong>Tipo de ceguera:</strong> {{ tipoCeguera }}</p>
                 </div>
                 }
