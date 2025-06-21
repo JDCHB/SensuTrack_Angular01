@@ -28,6 +28,6 @@ export class UsuarioService {
     constructor() { }
 
     getUsuarios(): Observable<any[]> {
-        return of(this.usuarios); // Simula una llamada HTTP (TENGO QUE INVESTIGARLO MEJOR)
+        return of(this.usuarios);
     }
 }
