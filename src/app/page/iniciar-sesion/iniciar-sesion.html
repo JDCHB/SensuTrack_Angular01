@@ -19,23 +19,37 @@
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">INICIAR SESIÓN</p>
 
-                                    <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()" class="mx-1 mx-md-4">
+                                    <!-- Loader -->
+                                    <div *ngIf="loading" class="text-center mb-3">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Cargando...</span>
+                                        </div>
+                                    </div>
+
+                                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mx-1 mx-md-4">
+
+                                        <!-- Email -->
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="bi bi-envelope fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <input type="email" id="correo" class="form-control form-control-lg"
                                                     formControlName="correo" placeholder="Correo Electrónico"
                                                     required />
+                                                <div class="text-danger small mt-1"
+                                                    *ngIf="loginForm.get('correo')?.touched && loginForm.get('correo')?.invalid">
+                                                    Correo inválido.
+                                                </div>
                                             </div>
                                         </div>
 
+                                        <!-- Contraseña -->
                                         <div class="d-flex flex-row align-items-center mb-4 position-relative">
                                             <i class="bi bi-lock fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <input [type]="showPassword ? 'text' : 'password'" id="contraseña"
                                                     class="form-control form-control-lg pe-5"
                                                     formControlName="contraseña" placeholder="Contraseña" required />
-                                                <button type="button" (click)="VisibilidadPassword()"
+                                                <button type="button" (click)="togglePasswordVisibility()"
                                                     class="btn btn-link p-0 m-0"
                                                     style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%);">
                                                     <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
@@ -43,6 +57,7 @@
                                             </div>
                                         </div>
 
+                                        <!-- Enlaces -->
                                         <div class="d-flex justify-content-around align-items-center mb-4">
                                             <a routerLink="/Cambio_Clave">¿Olvidaste la contraseña?</a>
                                         </div>
@@ -51,11 +66,20 @@
                                             <a routerLink="/FormularioRegistro">¿No tienes cuenta? ¡Regístrate!</a>
                                         </div>
 
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar
-                                                Sesión</button>
+                                        <!-- CAPTCHA -->
+                                        <div class="mb-4">
+                                            <div id="captcha-container"></div>
                                         </div>
 
+                                        <!-- Botón de envío -->
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-lg btn-block"
+                                                [disabled]="loading || loginForm.invalid">
+                                                Iniciar Sesión
+                                            </button>
+                                        </div>
+
+                                        <!-- Divider -->
                                         <div class="divider d-flex align-items-center my-4">
                                             <p class="text-center fw-bold mx-3 mb-0 text-muted">
                                                 TAMBIÉN PUEDES INICIAR SESIÓN CON:
@@ -73,6 +97,8 @@
                                         </button>
                                     </div>
                                 </div>
+
+                                <!-- Fin del Formulario -->
                             </div>
                         </div>
                     </div>
@@ -81,8 +107,5 @@
         </div>
     </div>
 </section>
-
-
-
 
 <app-footer></app-footer>
