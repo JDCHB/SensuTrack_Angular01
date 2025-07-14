@@ -1,10 +1,11 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-usuario',
-  imports: [RouterLink],
+  imports: [RouterLink, HttpClientModule],
   templateUrl: './navbar-usuario.html',
   styleUrl: './navbar-usuario.css'
 })
