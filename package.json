@@ -16,6 +16,8 @@
     "@angular/forms": "^20.0.0",
     "@angular/platform-browser": "^20.0.0",
     "@angular/router": "^20.0.0",
+    "@supabase/supabase-js": "^2.51.0",
+    "bootstrap": "^5.3.7",
     "datatables.net": "^2.3.2",
     "datatables.net-bs5": "^2.3.2",
     "datatables.net-dt": "^2.3.2",

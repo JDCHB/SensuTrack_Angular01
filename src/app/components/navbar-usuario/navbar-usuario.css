@@ -1,65 +1,125 @@
-/* Navbar Styling */
-.navbar {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Sombra suave para el navbar */
-    border-radius: 10px;
-    /* Bordes redondeados */
-}
+ /* Modal Carta */
+ /* Contenedor principal */
+ .flip-card-container {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     perspective: 1500px;
+     min-height: 320px;
+ }
 
-.navbar-brand img {
-    border-radius: 50%;
-    /* Logo redondeado */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* Sombra sutil al logo */
-}
+ /* Tarjeta que rota */
+ .flip-card {
+     width: 100%;
+     height: 100%;
+     transition: transform 0.8s;
+     transform-style: preserve-3d;
+     position: relative;
+ }
 
-.navbar-nav .nav-link {
-    transition: all 0.3s ease;
-    /* Efecto de transición suave en los enlaces */
-    padding: 8px 20px;
-    /* Espaciado adecuado entre los enlaces */
-    font-size: 16px;
-    /* Tamaño de fuente moderado */
-}
+ /* Aplicar rotación */
+ .flip-card-container.flipped .flip-card {
+     transform: rotateY(180deg);
+ }
 
-.navbar-nav .nav-link:hover {
-    color: #0079fa !important;
-    /* Color de hover */
-    text-decoration: underline;
-    /* Subrayado en hover */
-    transform: scale(1.1);
-    /* Efecto de agrandado en hover */
-}
+ /* Cada cara de la tarjeta */
+ .card-face {
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     left: 0;
+     backface-visibility: hidden;
+     padding: 15px 0;
+     transition: opacity 0.4s;
+ }
 
-.navbar-toggler {
-    border: 1px solid #0079fa;
-    /* Contorno anaranjado para el botón */
-    border-radius: 5px;
-}
+ /* Frente visible por defecto */
+ .card-front {
+     z-index: 2;
+ }
 
-.navbar-toggler-icon {
-    background-color: #0079fa;
-    /* Icono anaranjado para el menú */
-}
+ /* Parte trasera girada */
+ .card-back {
+     transform: rotateY(180deg);
+ }
 
-.nav-item i {
-    margin-right: 8px;
-    /* Espaciado entre el icono y el texto */
-}
+ .navbar {
+     backdrop-filter: blur(8px);
+     /* efecto glass suave */
+     background-color: rgba(255,
+             255,
+             255,
+             0.95);
+     /* fondo blanco semitransparente */
+     transition: all 0.3s ease;
+     z-index: 1000;
+     border: none;
+ }
 
-/* Estilos para la responsividad */
-@media (max-width: 991px) {
-    .navbar-brand {
-        text-align: center;
-        /* Centrar el logo en pantallas pequeñas */
-    }
+ .navbar-brand img {
+     transition: transform 0.3s ease;
+ }
 
-    .navbar-nav {
-        text-align: center;
-    }
+ .navbar-brand img:hover {
+     transform: scale(1.05);
+ }
 
-    .navbar-nav .nav-item {
-        margin-bottom: 15px;
-        /* Espaciado vertical entre los elementos en móviles */
-    }
-}
+ .navbar-nav .nav-link {
+     transition: all 0.3s ease;
+     padding: 8px 14px;
+     border-radius: 6px;
+ }
+
+ .navbar-nav .nav-link:hover {
+     color: #0d6efd !important;
+     background-color: rgba(13, 110, 253, 0.1);
+     text-decoration: none;
+ }
+
+ .navbar-toggler {
+     background-color: transparent;
+     border: none;
+     outline: none;
+ }
+
+ .dropdown-menu {
+     min-width: 180px;
+     border: none;
+     padding: 10px 0;
+     animation: fadeIn 0.2s ease-in-out;
+ }
+
+ .dropdown-menu .dropdown-item {
+     transition: background-color 0.2s ease;
+     padding: 10px 20px;
+ }
+
+ .dropdown-menu .dropdown-item:hover {
+     background-color: #f1f3f5;
+     border-radius: 5px;
+ }
+
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+         transform: translateY(-5px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ /* Responsive */
+ @media (max-width: 991px) {
+     .navbar-nav {
+         text-align: center;
+         gap: 10px;
+     }
+
+     .navbar-brand {
+         margin-bottom: 10px;
+     }
+ }

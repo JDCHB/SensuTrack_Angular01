@@ -1,51 +1,144 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
-    <a class="navbar-brand d-flex align-items-center" href="/usuario">
-        <img src="/logo.jpg" width="56" height="60" class="d-inline-block align-top rounded-circle"
-            alt="PetTracker logo" />
-        <span class="ms-2 text-dark fw-bold">SensuTrack</span>
+<nav class="navbar navbar-expand-lg navbar-light bg-light py-3 mb-4">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#" (click)="abrirModal($event)">
+        <img src="/logo.jpg" width="50" height="50" class="rounded-circle shadow-sm" alt="Logo SensuTrack" />
+        <div class="d-flex flex-column">
+            <span class="fw-bold text-dark">{{ usuario.nombre }}</span>
+            <small class="text-muted">SensuTrack</small>
+        </div>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" routerLink="/usuario">
-                    <i class="bi bi-house-door"></i> Inicio
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" routerLink="/reportes">
-                    <i class="bi bi-question-circle"></i> Reporte
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" routerLink="/GestionUsuarios">
-                    <i class="bi bi-envelope"></i> Gestión de usuarios
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" routerLink="/RegistroDiscapacitados">
-                    <i class="bi bi-envelope"></i> Registrar Discapacitado
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" routerLink="/GPS">
-                    <i class="bi bi-envelope"></i> GPS
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" routerLink="/dashboard">
-                    <i class="bi bi-envelope"></i> Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark fw-bold" (click)="cerrarSesion()">
-                    <i class="bi bi-box-arrow-left"></i> Cerrar Sesión
-                </a>
-            </li>
 
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list fs-2 text-primary"></i>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end mt-2 mt-lg-0" id="navbarNav">
+        <ul class="navbar-nav align-items-center gap-2">
+            <li class="nav-item">
+                <a class="nav-link fw-semibold text-dark" routerLink="/usuario">
+                    <i class="bi bi-house-door-fill me-1"></i> Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fw-semibold text-dark" routerLink="/RegistroDiscapacitados">
+                    <i class="bi bi-plus-circle me-1"></i> Registrar GPS
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fw-semibold text-dark" routerLink="/tracking">
+                    <i class="bi bi-geo-alt-fill me-1"></i> Ubicación en Vivo
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle fw-semibold text-dark" href="#" id="navbarDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle me-1"></i> Usuario
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow-sm" aria-labelledby="navbarDropdown">
+                    <li>
+                        <a class="dropdown-item text-danger" href="#" (click)="cerrarSesion()">
+                            <i class="bi bi-box-arrow-right me-1"></i> Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="Perfil_Usuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="Perfil_UsuarioLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <!-- Encabezado -->
+            <div class="modal-header text-white p-4 rounded-top-4"
+                style="background: linear-gradient(135deg, #4e54c8, #8f94fb);">
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-person-circle fs-1"></i>
+                    <div>
+                        <h4 class="modal-title m-0 fw-bold" id="Perfil_UsuarioLabel">
+                            {{ flipped ? 'Datos del Discapacitado' : 'Perfil de Usuario' }}
+                        </h4>
+                        <small class="text-white-50">
+                            {{ flipped ? 'Información de la persona asociada' : 'Datos personales del usuario actual' }}
+                        </small>
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Cerrar"></button>
+            </div>
+
+            <!-- Cuerpo -->
+            <div class="modal-body bg-light p-4">
+                <div [ngClass]="{ 'flipped': flipped }" class="flip-card-container">
+                    <div class="flip-card">
+                        <!-- Cara frontal -->
+                        <div class="card-face card-front" *ngIf="!flipped">
+                            <ng-container *ngIf="!loading; else cargando">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Nombre</label>
+                                        <input class="form-control" readonly [value]="usuario.nombre" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Apellido</label>
+                                        <input class="form-control" readonly [value]="usuario.apellido" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Correo</label>
+                                        <input class="form-control" readonly [value]="usuario.email" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Documento</label>
+                                        <input class="form-control" readonly [value]="usuario.documento" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Teléfono</label>
+                                        <input class="form-control" readonly [value]="usuario.telefono" />
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                        <!-- Cara trasera -->
+                        <div class="card-face card-back" *ngIf="flipped">
+                            <ng-container *ngIf="!loading; else cargando">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Nombre</label>
+                                        <input class="form-control" readonly [value]="discapacitado.nombre" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Documento</label>
+                                        <input class="form-control" readonly [value]="discapacitado.documento" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tipo de Ceguera</label>
+                                        <input class="form-control" readonly [value]="discapacitado.tipo_ceguera" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Género</label>
+                                        <input class="form-control" readonly [value]="discapacitado.genero" />
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+                <ng-template #cargando>
+                    <p class="text-center">Cargando...</p>
+                </ng-template>
+            </div>
+
+            <!-- Pie -->
+            <div class="modal-footer bg-white rounded-bottom-4 border-0 px-4 py-3">
+                <button type="button" class="btn btn-secondary" (click)="toggleCard()">
+                    {{ flipped ? 'Ver Usuario' : 'Ver Discapacitado' }}
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
