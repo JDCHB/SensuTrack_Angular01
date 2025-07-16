@@ -28,7 +28,7 @@ export class IniciarSesion implements OnInit {
   ngOnInit() {
     this.loginForm = this.fb.group({
       correo: ['', [Validators.required, Validators.email]],
-      contraseña: ['', [Validators.required, Validators.minLength(5)]],
+      contraseña: ['', [Validators.required, Validators.minLength(1)]],
     });
 
     // Inicializar reCAPTCHA
