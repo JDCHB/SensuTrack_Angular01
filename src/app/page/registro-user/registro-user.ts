@@ -6,6 +6,7 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import emailjs from 'emailjs-com';
 import { Navbar } from '../../components/navbar/navbar';
 import { Footer } from '../../components/footer/footer';
+import { UserService } from '../../services/users.service';
 
 declare const grecaptcha: any;
 
@@ -27,7 +28,7 @@ export class RegistroUser implements OnInit {
   templateID = 'template_e735fno';
   apiKey = 'dFD1OdFitzwQblEX0';
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userService: UserService) {
     this.RegisForm = this.fb.group({
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
@@ -100,7 +101,7 @@ export class RegistroUser implements OnInit {
         text: 'Ingresa el código de 6 caracteres que fue enviado a tu correo.',
         input: 'text',
         inputAttributes: {
-          maxlength: "6",
+          maxlength: '6',
           placeholder: 'CÓDIGO EN MAYÚSCULAS',
         },
         showCancelButton: true,
@@ -154,29 +155,22 @@ export class RegistroUser implements OnInit {
       return;
     }
 
-    // Enviar al backend
+    // Enviar al backend usando UserService
     this.loading = true;
-    try {
-      const response = await fetch('https://proyectomascotas.onrender.com/create_user', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          nombre: form.nombre,
-          apellido: form.apellido,
-          documento: form.documento,
-          telefono: form.telefono,
-          email: form.email,
-          password: form.password,
-          id_rol: 2,
-          estado: true,
-        }),
-      });
+    this.userService.createUser({
+      nombre: form.nombre,
+      apellido: form.apellido,
+      documento: form.documento,
+      telefono: form.telefono,
+      email: form.email,
+      password: form.password,
+      id_rol: 2,
+      estado: true,
+    }).subscribe({
+      next: async () => {
+        this.loading = false;
+        grecaptcha.reset();
 
-      const data = await response.json();
-      this.loading = false;
-      grecaptcha.reset();
-
-      if (response.ok) {
         await Swal.fire({
           title: `¡Registrado! ¡Bienvenido ${form.nombre}!`,
           icon: 'success',
@@ -184,14 +178,14 @@ export class RegistroUser implements OnInit {
           timerProgressBar: true,
           showConfirmButton: false,
         });
+
         this.RegisForm.reset();
-      } else {
-        Swal.fire('Error en el registro', data.detail || '', 'error');
-      }
-    } catch (e: any) {
-      this.loading = false;
-      console.error(e);
-      Swal.fire('Error en la solicitud', e.message || '', 'error');
-    }
+      },
+      error: (error) => {
+        this.loading = false;
+        grecaptcha.reset();
+        Swal.fire('Error en el registro', error.error?.detail || 'Ocurrió un error inesperado', 'error');
+      },
+    });
   }
 }
