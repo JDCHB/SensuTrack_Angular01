@@ -3,16 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Navbar } from '../../components/navbar/navbar';
 import { Footer } from '../../components/footer/footer';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormGroup, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
+import { UserService } from '../../services/users.service';
+
 
 declare const grecaptcha: any;
 
 @Component({
   selector: 'app-iniciar-sesion',
-  imports: [Navbar, Footer, FormsModule,
-    CommonModule, ReactiveFormsModule, RouterLink
+  imports: [
+    Navbar, Footer,
+    FormsModule, CommonModule,
+    ReactiveFormsModule, RouterLink
   ],
   templateUrl: './iniciar-sesion.html',
   styleUrl: './iniciar-sesion.css'
@@ -23,7 +26,7 @@ export class IniciarSesion implements OnInit {
   showPassword = false;
   loading = false;
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -59,20 +62,10 @@ export class IniciarSesion implements OnInit {
 
     const { correo, contraseña } = this.loginForm.value;
 
-    try {
-      const response = await fetch(
-        'https://proyectomascotas.onrender.com/login_generate_token',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: correo, password: contraseña }),
-        }
-      );
+    this.userService.loginGenerateToken({ email: correo, password: contraseña }).subscribe({
+      next: (data) => {
+        this.loading = false;
 
-      const data = await response.json();
-      this.loading = false;
-
-      if (response.ok) {
         grecaptcha.reset();
         const { access_token, user_data } = data;
         localStorage.setItem('access_token', access_token);
@@ -103,28 +96,23 @@ export class IniciarSesion implements OnInit {
         }).then(() => {
           this.router.navigate([ruta]);
         });
-      } else {
-        if (response.status === 403) {
+      },
+      error: (error) => {
+        this.loading = false;
+        if (error.status === 403) {
           Swal.fire({
             icon: 'warning',
             title: 'Cuenta Desactivada',
-            text: data.detail || 'Tu cuenta ha sido desactivada. Contacta al soporte.',
+            text: error.error.detail || 'Tu cuenta ha sido desactivada. Contacta al soporte.',
           });
         } else {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: data.detail || 'Usuario o Contraseña Incorrectos!',
+            text: error.error.detail || 'Usuario o Contraseña Incorrectos!',
           });
         }
-      }
-    } catch (e) {
-      this.loading = false;
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Hubo un problema con el inicio de sesión. Intenta nuevamente.',
-      });
-    }
+      },
+    });
   }
 }
