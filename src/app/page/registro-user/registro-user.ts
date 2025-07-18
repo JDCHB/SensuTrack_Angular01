@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
+
+//SWEET ALERT
 import Swal, { SweetAlertResult } from 'sweetalert2';
+
+//PARA EL ENVIO DEL CORREO
 import emailjs from 'emailjs-com';
+
+//COMPONENTES
 import { Navbar } from '../../components/navbar/navbar';
 import { Footer } from '../../components/footer/footer';
+
+// SERVICIO
 import { UserService } from '../../services/users.service';
 
 declare const grecaptcha: any;

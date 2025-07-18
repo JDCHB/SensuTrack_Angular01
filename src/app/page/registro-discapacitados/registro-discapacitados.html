@@ -11,25 +11,28 @@
                     <p class="text-muted">Por favor, completa los campos requeridos.</p>
                 </div>
 
-                <form (ngSubmit)="RegisterDiscapacitadoV()">
+                <form [formGroup]="discapacitadoForm" (ngSubmit)="onSubmit()">
                     <div class="mb-3">
-                        <label class="form-label">Nombre Completo</label>
-                        <input type="text" class="form-control" [(ngModel)]="v_nombre" name="nombre" required />
+                        <label class="form-label" for="Nombre">Nombre Completo</label>
+                        <input id="Nombre" formControlName="nombre" type="text" class="form-control" name="nombre"
+                            required />
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Documento</label>
-                        <input type="text" class="form-control" [(ngModel)]="v_documento" name="documento" required />
+                        <label class="form-label" for="Documento">Documento</label>
+                        <input id="Documento" formControlName="documento" type="text" class="form-control"
+                            name="documento" required />
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Documento de Verificación (PDF)</label>
-                        <input type="file" class="form-control" (change)="handleArchivo($event)" />
+                        <label class="form-label" for="Verificación">Documento de Verificación (PDF)</label>
+                        <input id="Verificación" type="file" class="form-control" (change)="handleArchivo($event)" />
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Género</label>
-                        <select class="form-select" [(ngModel)]="v_genero" name="genero" required>
+                        <label class="form-label" for="Género">Género</label>
+                        <select id="Genero" class="form-select" formControlName="id_genero_discapacitado" name="genero"
+                            required>
                             <option value="" disabled>Seleccionar</option>
                             <option value="1">Masculino</option>
                             <option value="2">Femenino</option>
@@ -37,8 +40,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Tipo de Ceguera</label>
-                        <select class="form-select" [(ngModel)]="v_tipo_ceguera" name="tipo_ceguera" required>
+                        <label class="form-label" for="Ceguera">Tipo de Ceguera</label>
+                        <select id="Ceguera" class="form-select" formControlName="id_tipo_ceguera" name="tipo_ceguera"
+                            required>
                             <option value="" disabled>Seleccionar</option>
                             <option value="1">Ceguera Total</option>
                             <option value="2">Ceguera Parcial</option>

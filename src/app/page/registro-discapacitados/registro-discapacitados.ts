@@ -1,53 +1,84 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+
+//FORMULARIO
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormGroup, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
+
+//SWEET ALERT
 import Swal from 'sweetalert2';
+
+//GUARDAR ARCHIVOS EN SUPABASE
 import { createClient } from '@supabase/supabase-js';
 
 // COMPONENTES
 import { NavbarUsuario } from '../../components/navbar-usuario/navbar-usuario';
 import { Footer } from '../../components/footer/footer';
 
+//SERVICIO
+import { DiscapacitadoService } from '../../services/discapacitado.service';
+
 
 @Component({
   selector: 'app-registro-discapacitados',
-  imports: [NavbarUsuario, Footer, CommonModule, FormsModule],
+  imports: [
+    NavbarUsuario, Footer,
+    CommonModule, FormsModule,
+    ReactiveFormsModule],
   templateUrl: './registro-discapacitados.html',
   styleUrl: './registro-discapacitados.css'
 })
 export class RegistroDiscapacitados implements OnInit {
-  v_nombre = '';
-  v_documento = '';
-  v_genero = '';
-  v_tipo_ceguera = '';
-  v_id_cuidador = '';
-  v_estado = true;
+
+  discapacitadoForm: FormGroup;
   archivoSeleccionado: File | null = null;
   loading = false;
+  v_id_cuidador: number = 0;
+  registerLoader: HTMLElement | null = null;
 
-  supabaseUrl = 'https://htrhxtphbszurzztjbim.supabase.co';
+  constructor(private fb: FormBuilder, private discapacitadoService: DiscapacitadoService) {
+    this.discapacitadoForm = this.fb.group({
+      nombre: ['', Validators.required],
+      documento: ['', Validators.required],
+      id_genero_discapacitado: ['', Validators.required],
+      id_tipo_ceguera: ['', Validators.required],
+    });
+  }
 
-  supabaseKey =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0cmh4dHBoYnN6dXJ6enRqYmltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMzYyMjAsImV4cCI6MjA2NjkxMjIyMH0.PfXvci3rJHAfTj9ZKfH5LEygs2E4De75xxojfgZU6_E'; // Usa tu clave pública
-  supabase = createClient(this.supabaseUrl, this.supabaseKey);
-
-  constructor(private http: HttpClient) { }
-
-  ngOnInit(): void {
+  ngOnInit() {
     const storedUser = localStorage.getItem('user_data');
     if (storedUser) {
       const user = JSON.parse(storedUser);
-      this.v_id_cuidador = user.id;
+      this.v_id_cuidador = Number(user.id);
     }
+
+    this.registerLoader = document.getElementById('register-loader');
   }
 
-  handleArchivo(event: any): void {
-    this.archivoSeleccionado = event.target.files[0];
+  handleArchivo(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.archivoSeleccionado = input.files?.[0] ?? null;
   }
 
-  async subirPDF(nombre: string, archivo: File): Promise<string | null> {
-    const nombreArchivo = `${nombre.toLowerCase().replace(/\s+/g, '_')}_${Date.now()}.pdf`;
+  private supabaseUrl = 'https://htrhxtphbszurzztjbim.supabase.co';
+  private supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0cmh4dHBoYnN6dXJ6enRqYmltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMzYyMjAsImV4cCI6MjA2NjkxMjIyMH0.PfXvci3rJHAfTj9ZKfH5LEygs2E4De75xxojfgZU6_E';
+  private supabase = createClient(this.supabaseUrl, this.supabaseKey);
+
+  async subirPDF(nombreDiscapacitado: string, archivo: File): Promise<string | null> {
+    if (!archivo || archivo.type !== 'application/pdf') {
+      console.error('Archivo inválido o no es un PDF.');
+      return null;
+    }
+
+    const nombreSanitizado = nombreDiscapacitado
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, '_')
+      .replace(/[^a-z0-9_]/g, '');
+
+    const nombreArchivo = `${nombreSanitizado}_${Date.now()}.pdf`;
 
     const { error } = await this.supabase.storage
       .from('verificaciones')
@@ -57,46 +88,64 @@ export class RegistroDiscapacitados implements OnInit {
       });
 
     if (error) {
-      console.error('Error al subir archivo:', error.message);
+      console.error('Error al subir el archivo:', error.message);
       return null;
     }
 
-    return `${this.supabaseUrl}/storage/v1/object/public/verificaciones/${nombreArchivo}`;
+    return `https://htrhxtphbszurzztjbim.supabase.co/storage/v1/object/public/verificaciones/${nombreArchivo}`;
   }
 
-  async RegisterDiscapacitadoV() {
-    if (!this.archivoSeleccionado) {
-      Swal.fire('Error', 'Debes seleccionar un documento de verificación', 'error');
+  async onSubmit() {
+    if (this.discapacitadoForm.invalid || !this.archivoSeleccionado) {
+      Swal.fire(
+        'Campos incompletos',
+        'Por favor completa todos los campos y selecciona un archivo PDF.',
+        'warning'
+      );
       return;
     }
 
     this.loading = true;
 
-    try {
-      const urlDocumento = await this.subirPDF(this.v_nombre, this.archivoSeleccionado);
+    const form = this.discapacitadoForm.value;
+    const urlDocumento = await this.subirPDF(form.nombre, this.archivoSeleccionado);
 
-      if (!urlDocumento) throw new Error('Error al subir el documento');
-
-      const body = {
-        nombre: this.v_nombre,
-        documento: this.v_documento,
-        id_genero_discapacitado: this.v_genero,
-        id_tipo_ceguera: this.v_tipo_ceguera,
-        id_cuidador: this.v_id_cuidador,
-        estado: this.v_estado,
-        documento_verificacion: urlDocumento,
-      };
-
-      const response = await this.http
-        .post('https://proyectomascotas.onrender.com/create_discapacitadoV', body)
-        .toPromise();
-
-      Swal.fire('Registro exitoso', 'Se notificará por correo cuando se apruebe.', 'success');
-    } catch (e) {
-      console.error(e);
-      Swal.fire('Error', 'Hubo un problema en el registro', 'error');
-    } finally {
+    if (!urlDocumento) {
       this.loading = false;
+      Swal.fire('Error', 'No se pudo subir el documento', 'error');
+      return;
     }
+
+    this.discapacitadoService.createDiscapacitado({
+      nombre: form.nombre,
+      documento: form.documento,
+      id_genero_discapacitado: form.id_genero_discapacitado,
+      id_tipo_ceguera: form.id_tipo_ceguera,
+      id_cuidador: this.v_id_cuidador,
+      estado: true,
+      documento_verificacion: urlDocumento,
+    }).subscribe({
+      next: async () => {
+        this.loading = false;
+        await Swal.fire({
+          title: `¡Registro exitoso de ${form.nombre}!`,
+          text: 'Se te notificará por correo si se aprueba la solicitud',
+          icon: 'success',
+          timer: 4000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
+
+        this.discapacitadoForm.reset();
+      },
+      error: (error) => {
+        this.loading = false;
+        Swal.fire(
+          'Error en el registro',
+          error.error?.detail || 'Ocurrió un error inesperado',
+          'error'
+        );
+      },
+    });
   }
 }
