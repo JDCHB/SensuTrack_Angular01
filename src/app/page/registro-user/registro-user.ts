@@ -155,7 +155,6 @@ export class RegistroUser implements OnInit {
       return;
     }
 
-    // Enviar al backend usando UserService
     this.loading = true;
     this.userService.createUser({
       nombre: form.nombre,
