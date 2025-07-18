@@ -3,9 +3,6 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { DiscapacitadoV, GetDiscapacitadoVUsuario, DiscapacitadoVCompleto, UpdateDiscapacitadoV, CiegosReport, CiegosReporte, DiscapacitadoEstado, CiegosMap, CiegoZonaS, CiegoZonaSUpdate } from '../models/discapacitado.model';
 
-Observable
-HttpClient
-
 @Injectable({
     providedIn: 'root'
 })
@@ -88,7 +85,7 @@ export class DiscapacitadoService {
         return this.http.post(`${this.apiUrl}/Ciegos_Report`, data);
     }
 
-    obtenerDiscapacitadoDesdeUserID(data: CiegosMap): Observable<any> {
+    Discapacitado_Mapa(data: CiegosMap): Observable<any> {
         return this.http.post(`${this.apiUrl}/Ciegos_Map`, data);
     }
 }

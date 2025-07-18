@@ -1,16 +1,25 @@
 <app-navbar-usuario></app-navbar-usuario>
-<h2>Ubicación del GPS</h2>
+<div class="mapa-section">
+    <h2 class="titulo-mapa">🌍 Ubicación del GPS</h2>
 
-<div class="boton-container">
-    <button (click)="toggleAgregarZona()" class="zona-btn">
-        {{ modoAgregarZona ? 'Cerrar Configuración de Zona Segura' : 'Configurar Zona Segura' }}
-    </button>
+    <div class="acciones">
+        <button (click)="toggleAgregarZona()" class="btn-zona">
+            <i class="bi bi-geo-alt-fill"></i>
+            {{ modoAgregarZona ? 'Cerrar configuración de zona segura' : 'Configurar zona segura' }}
+        </button>
+    </div>
+
+    <div *ngIf="loading && !error" class="estado-mensaje loading">
+        <i class="bi bi-arrow-repeat spin"></i> Cargando ubicaciones...
+    </div>
+    <div *ngIf="error" class="estado-mensaje error">
+        <i class="bi bi-exclamation-triangle-fill"></i> Error: {{ error }}
+    </div>
+
+    <div class="contenedor-mapa">
+        <div id="map"></div>
+    </div>
 </div>
 
-<p *ngIf="error" class="error-msg">Error: {{ error }}</p>
-<p *ngIf="!error && cargando" class="loading-msg">Cargando ubicaciones...</p>
 
-<div class="map-container">
-    <div id="map"></div>
-</div>
 <app-footer></app-footer>

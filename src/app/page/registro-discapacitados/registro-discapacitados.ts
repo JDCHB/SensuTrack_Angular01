@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 //FORMULARIO
 import { FormsModule } from '@angular/forms';
