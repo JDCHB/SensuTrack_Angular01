@@ -13,7 +13,7 @@ Bienvenido a Angular estimados lectores:
 
 
 -----------------------------------Abres el proyecto desde visual--------------------------------------------------------------
-5. Ng g c nombre_del_componente      <--USAR CUALQUIERA DE LOS DOS COMANDO-->   ng generate component nombre_del_componente 
+5. Ng g c ruta/nombre_del_componente      <--USAR CUALQUIERA DE LOS DOS COMANDO-->   ng generate component nombre_del_componente 
 
 6. Colocar en app.routes.ts: 
 import { Routes } from '@angular/router';

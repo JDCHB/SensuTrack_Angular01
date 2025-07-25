@@ -1,0 +1,37 @@
+<div class="wrapper">
+    <div class="title small-title" style="color: dodgerblue;">
+        REGISTRO DE USUARIOS
+    </div>
+
+    <form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()" class="class-form">
+        <input class="form__input small-input" formControlName="nombre" placeholder="Nombre" type="text"
+            autocomplete="off" required />
+
+        <input class="form__input small-input" formControlName="apellido" placeholder="Apellido" type="text"
+            autocomplete="off" required />
+
+        <input class="form__input small-input" formControlName="documento" placeholder="Documento" type="text"
+            autocomplete="off" required />
+
+        <input class="form__input small-input" formControlName="telefono" placeholder="Teléfono" type="text"
+            autocomplete="off" required />
+
+        <input class="form__input small-input" formControlName="email" placeholder="Correo Electrónico" type="email"
+            autocomplete="off" required />
+
+        <input class="form__input small-input" formControlName="password" placeholder="Contraseña" type="password"
+            autocomplete="off" required />
+
+        <input class="form__input small-input" formControlName="confirmar_password" placeholder="Confirmar Contraseña"
+            type="password" autocomplete="off" required />
+
+        <select class="form__select" formControlName="rol" required>
+            <option value="" disabled selected>Seleccione el Rol:</option>
+            <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</option>
+        </select>
+
+        <button class="flip-card__btn small-btn" type="submit" [disabled]="loading">
+            {{ loading ? 'Registrando...' : 'Confirmar' }}
+        </button>
+    </form>
+</div>

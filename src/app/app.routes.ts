@@ -11,6 +11,8 @@ import { Dashboard } from './page/dashboard/dashboard';
 import { RegistroDiscapacitados } from './page/registro-discapacitados/registro-discapacitados';
 import { GPS } from './page/gps/gps';
 import { RegistroUser } from './page/registro-user/registro-user';
+import { Admin } from './page/admin/admin';
+import { RegistroUsu } from './components/admin/registro-usu/registro-usu';
 
 
 export const routes: Routes = [
@@ -25,5 +27,8 @@ export const routes: Routes = [
     { path: 'RegistroDiscapacitados', component: RegistroDiscapacitados },
     { path: 'GPS', component: GPS },
     { path: 'FormularioRegistro', component: RegistroUser },
+    { path: 'Sistema-Administrativo', component: Admin },
+    // ADMINISTRADOR
+    { path: 'registro-usuario', component: RegistroUsu },
     { path: '**', component: PaginaError }
 ];

@@ -1,0 +1,93 @@
+<div class="layout">
+    <!-- Sidebar -->
+    <div class="sidebar" (mouseenter)="expandirSidebar()" (mouseleave)="colapsarSidebar()" role="navigation">
+        <div class="sidebar-header">
+            <ng-container *ngIf="expandido; else iconOnly">
+                <h2>Super Admin</h2>
+                <small style="font-size: 0.8rem; color: #cbd5e1;">{{ nombreUsuario }}</small>
+            </ng-container>
+            <ng-template #iconOnly>
+                <i class="bi bi-person-circle fs-3"></i>
+            </ng-template>
+        </div>
+
+        <nav>
+            <button (click)="mostrarConfirmacionRegistroUsuario()">
+                <i class="bi bi-person-add"></i>
+                <span *ngIf="expandido">Registrar Usuario</span>
+            </button>
+            <button (click)="mostrarConfirmacionReporte()">
+                <i class="bi bi-file-earmark-spreadsheet"></i>
+                <span *ngIf="expandido">Reportes</span>
+            </button>
+            <button (click)="mostrarConfirmacionRegistroGPS()">
+                <i class="bi bi-geo-alt"></i>
+                <span *ngIf="expandido">Registrar GPS</span>
+            </button>
+            <button (click)="mostrarTablaUsuarios()">
+                <i class="bi bi-table"></i>
+                <span *ngIf="expandido">Tabla Usuarios</span>
+            </button>
+            <button (click)="mostrarTablaCiegos()">
+                <i class="bi bi-table"></i>
+                <span *ngIf="expandido">Tabla Discapacitados</span>
+            </button>
+            <button (click)="mostrarRegistroRoles()">
+                <i class="bi bi-person-badge"></i>
+                <span *ngIf="expandido">Registrar Roles</span>
+            </button>
+            <button (click)="mostrarRegistroModulos()">
+                <i class="bi bi-stack"></i>
+                <span *ngIf="expandido">Registrar Módulos</span>
+            </button>
+            <button (click)="mostrarRegistroModuloxRol()">
+                <i class="bi bi-shield-lock"></i>
+                <span *ngIf="expandido">Asignar Módulo</span>
+            </button>
+            <button (click)="mostrarTableroPowerBI()">
+                <i class="bi bi-graph-up"></i>
+                <span *ngIf="expandido">Tablero</span>
+            </button>
+            <button (click)="mostrarHistorialUbicaciones()">
+                <i class="bi bi-map"></i>
+                <span *ngIf="expandido">Ubicaciones</span>
+            </button>
+            <button (click)="logout()" class="logout">
+                <i class="bi bi-power"></i>
+                <span *ngIf="expandido">Cerrar Sesión</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Contenido a la derecha -->
+    <main class="content">
+        <ng-container [ngSwitch]="activeSection">
+            <div *ngSwitchCase="'X'" class="admin-welcome">
+                <h1>👋 ¡Bienvenido, Administrador!</h1>
+                <p class="subtitle">
+                    Este panel te permite tener el control total del sistema para apoyar a las personas ciegas con
+                    eficiencia y seguridad.
+                </p>
+            </div>
+
+            <app-registro-usu *ngSwitchCase="'registro_usuario'"></app-registro-usu>
+            <!--
+            <app-reportes *ngSwitchCase="'reportes'"></app-reportes>
+            <app-registro-gps *ngSwitchCase="'registro_gps'"></app-registro-gps>
+            <app-tabla-usuarios *ngSwitchCase="'tabla_usuarios'"></app-tabla-usuarios>
+            <app-tabla-ciegos *ngSwitchCase="'tabla_discapacitados'"></app-tabla-ciegos>
+            <app-registrar-roles *ngSwitchCase="'registro_roles'"></app-registrar-roles>
+            <app-registro-modulos *ngSwitchCase="'registro_modulos'"></app-registro-modulos>
+            <app-modulo-rol *ngSwitchCase="'modulos_por_rol'"></app-modulo-rol>
+            <app-powerbi *ngSwitchCase="'tablero'"></app-powerbi>
+            <app-historial-ubicaciones *ngSwitchCase="'historial_ubicaciones'"></app-historial-ubicaciones> -->
+        </ng-container>
+
+        <!-- Loader -->
+        <div #registerLoader class="loader-container">
+            <div class="loader-text">
+                <span *ngFor="let letra of ['S','e','n','s','u','T','r','a','c','k']">{{ letra }}</span>
+            </div>
+        </div>
+    </main>
+</div>
