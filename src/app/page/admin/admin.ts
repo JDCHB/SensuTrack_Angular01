@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RegistroUsu } from '../../components/admin/registro-usu/registro-usu';
 import { Reportes } from '../../components/admin/reportes/reportes';
-
+import { TablaUsuarios } from '../../components/admin/tabla-usuarios/tabla-usuarios';
 
 @Component({
   selector: 'app-admin',
   imports: [CommonModule,
-    RegistroUsu, Reportes],
+    RegistroUsu, Reportes,
+    TablaUsuarios],
   templateUrl: './admin.html',
   styleUrl: './admin.css'
 })

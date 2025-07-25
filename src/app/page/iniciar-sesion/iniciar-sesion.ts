@@ -85,7 +85,7 @@ export class IniciarSesion implements OnInit {
           ruta = '/usuario';
         } else if (rol === 3) {
           mensaje = `¡Bienvenido al Sistema de Super Administrador! ${nombre}`;
-          ruta = '/administrador';
+          ruta = '/Sistema-Administrativo';
         }
 
         Swal.fire({
