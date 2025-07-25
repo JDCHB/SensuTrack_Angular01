@@ -2,11 +2,13 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RegistroUsu } from '../../components/admin/registro-usu/registro-usu';
+import { Reportes } from '../../components/admin/reportes/reportes';
 
 
 @Component({
   selector: 'app-admin',
-  imports: [CommonModule, RegistroUsu],
+  imports: [CommonModule,
+    RegistroUsu, Reportes],
   templateUrl: './admin.html',
   styleUrl: './admin.css'
 })

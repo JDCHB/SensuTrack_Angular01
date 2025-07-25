@@ -1,0 +1,60 @@
+<div class="report-panel container bg-white rounded-4 shadow p-5 my-5">
+    <h2 class="text-center fw-bold text-primary mb-5">
+        <i class="fas fa-chart-bar me-2"></i>Generación de Reportes
+    </h2>
+
+    <div class="row g-4 align-items-end">
+        <div class="col-md-4">
+            <label for="opcion" class="form-label">Seleccionar tipo:</label>
+            <select id="opcion" class="form-select form-select-lg" [(ngModel)]="opcionSeleccionada" name="opcion"
+                required>
+                <option [value]="1">Personas con discapacidad visual</option>
+                <option [value]="2">Usuarios del sistema</option>
+                <option [value]="3">Otro</option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label for="desde_ciegos" class="form-label">Desde:</label>
+            <input type="date" id="desde_ciegos" class="form-control form-control-lg" [(ngModel)]="fechaDesde"
+                name="desde" />
+        </div>
+
+        <div class="col-md-4">
+            <label for="hasta_ciegos" class="form-label">Hasta:</label>
+            <input type="date" id="hasta_ciegos" class="form-control form-control-lg" [(ngModel)]="fechaHasta"
+                name="hasta" />
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <button type="button" class="btn btn-primary btn-lg px-5" (click)="generar()">
+            <i class="fas fa-file-alt me-2"></i> Generar Reporte
+        </button>
+    </div>
+</div>
+
+<!-- Resultados -->
+<div class="container mt-5 p-4 rounded-4 bg-light shadow-sm" *ngIf="loading || error || mostrarPDF">
+    <div *ngIf="loading">
+        <div class="progress" style="height: 6px;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar"
+                style="width: 100%"></div>
+        </div>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger text-center mb-0" role="alert">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        {{ error }}
+    </div>
+
+    <div *ngIf="mostrarPDF" class="text-center">
+        <h4 class="mb-4 text-secondary">Vista previa del reporte</h4>
+        <iframe [src]="pdfUrl | safeUrl" title="Vista previa del PDF" class="report-frame"></iframe>
+        <div class="mt-4">
+            <a [href]="pdfUrl" download="ReporteDiscapacitados.pdf" class="btn btn-success btn-lg px-5">
+                <i class="fas fa-download me-2"></i> Descargar PDF
+            </a>
+        </div>
+    </div>
+</div>
