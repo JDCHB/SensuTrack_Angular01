@@ -6,13 +6,14 @@ import { Reportes } from '../../components/admin/reportes/reportes';
 import { TablaUsuarios } from '../../components/admin/tabla-usuarios/tabla-usuarios';
 import { TablaDiscapacitados } from '../../components/admin/tabla-discapacitados/tabla-discapacitados';
 import { RegistroDiscapacitado } from '../../components/admin/registro-discapacitado/registro-discapacitado';
+import { Dashboard } from '../../components/admin/dashboard/dashboard';
 
 @Component({
   selector: 'app-admin',
   imports: [CommonModule,
     RegistroUsu, Reportes,
     TablaUsuarios, TablaDiscapacitados,
-    RegistroDiscapacitado],
+    RegistroDiscapacitado, Dashboard],
   templateUrl: './admin.html',
   styleUrl: './admin.css'
 })

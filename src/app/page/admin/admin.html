@@ -32,10 +32,10 @@
                 <i class="bi bi-table"></i>
                 <span *ngIf="expandido">Tabla Discapacitados</span>
             </button>
-            <button (click)="mostrarRegistroRoles()">
+            <!-- <button (click)="mostrarRegistroRoles()">
                 <i class="bi bi-person-badge"></i>
                 <span *ngIf="expandido">Registrar Roles</span>
-            </button>
+            </button> -->
             <!-- <button (click)="mostrarRegistroModulos()">
                 <i class="bi bi-stack"></i>
                 <span *ngIf="expandido">Registrar Módulos</span>
@@ -75,11 +75,13 @@
             <app-registro-discapacitado *ngSwitchCase="'registro_gps'"></app-registro-discapacitado>
             <app-tabla-usuarios *ngSwitchCase="'tabla_usuarios'"></app-tabla-usuarios>
             <app-tabla-discapacitados *ngSwitchCase="'tabla_discapacitados'"></app-tabla-discapacitados>
+            <app-dashboard *ngSwitchCase="'tablero'"></app-dashboard>
             <!--
             <app-registrar-roles *ngSwitchCase="'registro_roles'"></app-registrar-roles>
             <app-registro-modulos *ngSwitchCase="'registro_modulos'"></app-registro-modulos>
             <app-modulo-rol *ngSwitchCase="'modulos_por_rol'"></app-modulo-rol>
-            <app-powerbi *ngSwitchCase="'tablero'"></app-powerbi>
+            -->
+            <!--
             <app-historial-ubicaciones *ngSwitchCase="'historial_ubicaciones'"></app-historial-ubicaciones> -->
         </ng-container>
 
