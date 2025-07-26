@@ -6,6 +6,8 @@ import { UserService } from '../../../services/users.service';
 //FORMULARIO
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
 //SWEET ALERT
 import Swal from 'sweetalert2'
 
@@ -17,7 +19,7 @@ import 'datatables.net-bs5';
 
 @Component({
   selector: 'app-tabla-usuarios',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './tabla-usuarios.html',
   styleUrl: './tabla-usuarios.css'
 })

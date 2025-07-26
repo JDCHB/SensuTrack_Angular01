@@ -64,3 +64,80 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal de edición 
+<div class="modal fade" id="modalEditarDiscapacitado" tabindex="-1" aria-labelledby="modalEditarLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="modalEditarLabel"><b>Editar Discapacitado</b></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <form [formGroup]="formulario">
+                <div class="modal-body">
+
+                    <div class="mb-3 row">
+                        <label for="nombre" class="col-sm-3 col-form-label">Nombre:</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="nombre" class="form-control" formControlName="nombre" readonly />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="apellido" class="col-sm-3 col-form-label">Apellido:</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="apellido" class="form-control" formControlName="apellido" readonly />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="documento" class="col-sm-3 col-form-label">Documento:</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="documento" class="form-control" formControlName="documento"
+                                readonly />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="telefono" class="col-sm-3 col-form-label">Teléfono:</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="telefono" class="form-control" formControlName="telefono" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="email" class="col-sm-3 col-form-label">Email:</label>
+                        <div class="col-sm-9">
+                            <input type="email" id="email" class="form-control" formControlName="email" />
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 row">
+                        <label for="estado" class="col-sm-3 col-form-label">Estado:</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" formControlName="estado">
+                                <option value="1">Activar</option>
+                                <option value="0">Desactivar</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-success" (click)="actualizar()"
+                        [disabled]="formulario.invalid">
+                        Actualizar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+-->
