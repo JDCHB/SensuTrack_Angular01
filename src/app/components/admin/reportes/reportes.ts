@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DiscapacitadoService } from '../../../services/discapacitado.service';
-import { SafeUrlPipe } from '../../../services/safe-url.pipe';
+import { SafeUrlPipe } from '../../../services/safe-url-reporte.pipe';
 
 @Component({
   selector: 'app-reportes',

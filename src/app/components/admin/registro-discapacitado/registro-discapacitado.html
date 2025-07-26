@@ -1,0 +1,79 @@
+<div id="MostrarDiscapacitado">
+    <div class="container py-4 bg-light rounded shadow">
+        <h2 class="text-center mb-4 pb-2 fw-bold">
+            <i class="bi bi-eye-slash-fill me-2 text-primary"></i>
+            Discapacitados por Verificar
+            <i class="bi bi-eye-slash-fill ms-2 text-primary"></i>
+        </h2>
+
+        <div *ngIf="loading" class="d-flex flex-column align-items-center justify-content-center py-5">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3 text-muted">Cargando discapacitados por verificar...</p>
+        </div>
+
+        <div *ngIf="!loading && error" class="alert alert-danger text-center">{{ error }}</div>
+
+        <div *ngIf="!loading && !error" class="table-responsive">
+            <table class="table table-hover table-bordered align-middle" id="myTable">
+                <thead class="thead-light text-center">
+                    <tr>
+                        <th class="px-4 py-2 border">Nombre del Discapacitado</th>
+                        <th class="px-4 py-2 border">Documento del Discapacitado</th>
+                        <th class="px-4 py-2 border">Género del Discapacitado</th>
+                        <th class="px-4 py-2 border">Tipo de Ceguera</th>
+                        <th class="px-4 py-2 border">Cuidador Responsable</th>
+                        <th class="px-4 py-2 border">Archivo de Verificación</th>
+                        <th class="px-4 py-2 border">Opción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let todo of todos">
+                        <td>{{ todo.nombre }}</td>
+                        <td>{{ todo.documento }}</td>
+                        <td>{{ todo.genero }}</td>
+                        <td>{{ todo.tipo_ceguera }}</td>
+                        <td>{{ todo.Usuario_Cuidador }}</td>
+                        <td>
+                            <button *ngIf="todo.documento_verificacion" class="btn btn-outline-primary btn-sm"
+                                (click)="mostrarModalPDF(todo.documento_verificacion)">
+                                Ver Documento
+                            </button>
+                            <span *ngIf="!todo.documento_verificacion" class="text-muted">No disponible</span>
+                        </td>
+                        <td class="text-center">
+                            <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                <button class="btn btn-sm btn-outline-success d-flex align-items-center gap-1"
+                                    (click)="aceptarSolicitud(todo.id, todo.nombre, todo.Usuario_Cuidador, todo.Nombre_Cuidador, todo.documento)">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <span class="d-none d-md-inline">Aceptar</span>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
+                                    (click)="rechazarSolicitud(todo.id, todo.nombre, todo.Usuario_Cuidador, todo.Nombre_Cuidador, todo.documento)">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                    <span class="d-none d-md-inline">Rechazar</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal PDF -->
+    <div *ngIf="pdfUrl" class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.6);">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Vista previa del documento</h5>
+                    <button type="button" class="btn-close" aria-label="Close" (click)="cerrarModalPDF()"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe [src]="pdfUrl | safe" width="100%" height="600px" style="border: none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
