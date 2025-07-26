@@ -15,8 +15,7 @@ import Swal from 'sweetalert2'
 import emailjs from 'emailjs-com';
 
 import $ from 'jquery';
-import 'datatables.net-bs5';
-
+import 'datatables.net'
 @Component({
   selector: 'app-tabla-usuarios',
   imports: [CommonModule, ReactiveFormsModule],
@@ -55,7 +54,7 @@ export class TablaUsuarios implements OnInit {
         this.todos = response.resultado;
         setTimeout(() => {
           ($('#myTable') as any).DataTable();
-        }, 0);
+        }, 1);
 
       },
       error: (err) => this.error = err.message,
