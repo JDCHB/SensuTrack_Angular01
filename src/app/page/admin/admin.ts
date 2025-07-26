@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { RegistroUsu } from '../../components/admin/registro-usu/registro-usu';
 import { Reportes } from '../../components/admin/reportes/reportes';
 import { TablaUsuarios } from '../../components/admin/tabla-usuarios/tabla-usuarios';
+import { TablaDiscapacitados } from '../../components/admin/tabla-discapacitados/tabla-discapacitados';
 
 @Component({
   selector: 'app-admin',
   imports: [CommonModule,
     RegistroUsu, Reportes,
-    TablaUsuarios],
+    TablaUsuarios, TablaDiscapacitados],
   templateUrl: './admin.html',
   styleUrl: './admin.css'
 })
