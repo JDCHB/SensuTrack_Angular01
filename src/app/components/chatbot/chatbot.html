@@ -1,0 +1,40 @@
+<button class="chat-button" (click)="mostrarChat()" aria-label="Abrir Chatbot" (keydown)="handleKeyDown($event)">
+    💬
+</button>
+
+<div [ngClass]="{ 'chat-window': true, 'hidden': !showChat }" [attr.aria-hidden]="!showChat">
+    <div class="chat-header">
+        <span>Chatbot</span>
+        <button class="close-button" (click)="mostrarChat()" aria-label="Cerrar Chatbot">
+            ❌
+        </button>
+    </div>
+
+    <div class="chat-body">
+        <div *ngFor="let mensaje of mensajes" class="chat-message" [ngStyle]="{
+        'text-align': mensaje.from === 'user' ? 'right' : 'left'
+      }">
+            <span class="message-bubble" [ngStyle]="{
+          'background-color': mensaje.from === 'user' ? '#007bff' : '#e0e0e0',
+          color: mensaje.from === 'user' ? 'white' : 'black'
+        }">
+                {{ mensaje.text }}
+            </span>
+        </div>
+
+        <div *ngIf="isTyping" class="chat-message" style="text-align: left;">
+            <span class="typing-indicator">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </span>
+        </div>
+    </div>
+
+    <div class="chat-footer">
+        <input [(ngModel)]="v_message" type="text" placeholder="Escribe tu mensaje..." (keydown.enter)="ChatBot()" />
+
+
+        <button (click)="ChatBot()">Enviar</button>
+    </div>
+</div>

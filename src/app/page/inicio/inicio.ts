@@ -5,10 +5,12 @@ import { Promociones } from '../../components/promociones/promociones';
 import { Servicios } from '../../components/servicios/servicios';
 import { Banner } from '../../components/banner/banner';
 import { Footer } from '../../components/footer/footer';
+import { Chatbot } from '../../components/chatbot/chatbot';
+
 @Component({
   selector: 'app-inicio',
   imports: [Navbar, Carrousel, Promociones, Servicios,
-    Banner, Footer],
+    Banner, Footer, Chatbot],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css'
 })
