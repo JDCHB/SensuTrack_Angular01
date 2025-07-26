@@ -19,12 +19,6 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="Documento">Documento</label>
-                        <input id="Documento" formControlName="documento" type="text" class="form-control"
-                            name="documento" required />
-                    </div>
-
-                    <div class="mb-3">
                         <label class="form-label" for="Verificación">Documento de Verificación (PDF)</label>
                         <input id="Verificación" type="file" class="form-control" (change)="handleArchivo($event)" />
                     </div>
@@ -49,6 +43,20 @@
                         </select>
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label" for="Documento">Documento</label>
+                        <input id="Documento" formControlName="documento" type="text" class="form-control"
+                            name="documento" required />
+                    </div>
+
+                    <!-- Botón para abrir el modal -->
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill px-4 py-2 shadow"
+                            data-bs-toggle="modal" data-bs-target="#modalCamara">
+                            📸 Tomar foto de cédula
+                        </button>
+                    </div>
+
                     <button type="submit" class="btn btn-primary w-100 mt-4 py-3 fs-5 shadow rounded-pill">
                         Registrar
                     </button>
@@ -64,6 +72,47 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="modalCamara" tabindex="-1" aria-labelledby="modalCamaraLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content rounded-4 shadow-lg">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary" id="modalCamaraLabel">📸 Captura de Cédula</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="stopCamera()"></button>
+            </div>
+
+            <!-- Contenedor del video con marco guía -->
+            <div class="video-container position-relative mx-auto mt-3" style="max-width: 500px;">
+                <video #video class="rounded-3 border border-secondary w-100" autoplay playsinline></video>
+
+                <!-- Imagen guía encima del video -->
+                <img *ngIf="marcoVisible" src="/marco-cedula.png" alt="Guía de cédula"
+                    class="overlay-marco position-absolute top-0 start-0 w-100 h-100 pointer-events-none" />
+            </div>
+
+            <canvas #canvas hidden></canvas>
+
+            <!-- Botones -->
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <button (click)="startCamera()" type="button" class="btn btn-outline-success shadow-sm">
+                    <i class="bi bi-camera-video-fill"></i> Activar cámara
+                </button>
+                <button (click)="takePhoto()" type="button" class="btn btn-outline-primary shadow-sm">
+                    <i class="bi bi-camera-fill"></i> Tomar foto
+                </button>
+            </div>
+
+            <!-- Imagen capturada -->
+            <div *ngIf="capturedImage" class="text-center mt-4 mb-3">
+                <h6 class="text-muted mb-3">🖼 Imagen capturada:</h6>
+                <img [src]="capturedImage" class="img-fluid rounded-4 shadow border border-primary"
+                    style="max-width: 400px;" />
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <app-footer></app-footer>

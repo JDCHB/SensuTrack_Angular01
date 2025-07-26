@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+
+//PRUEBA
+import { ViewChild, ElementRef } from '@angular/core';
+declare var bootstrap: any;
+
+
+
+
 //FORMULARIO
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -147,4 +155,80 @@ export class RegistroDiscapacitados implements OnInit {
       },
     });
   }
+
+  @ViewChild('video') videoRef!: ElementRef<HTMLVideoElement>;
+  @ViewChild('canvas') canvasRef!: ElementRef<HTMLCanvasElement>;
+  capturedImage: string | null = null;
+  marcoVisible: boolean = false;
+
+
+  startCamera() {
+    this.marcoVisible = true;
+    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+      this.videoRef.nativeElement.srcObject = stream;
+
+      // Ajustar tamaño del canvas al iniciar
+      setTimeout(() => {
+        this.canvasRef.nativeElement.width = this.videoRef.nativeElement.videoWidth;
+        this.canvasRef.nativeElement.height = this.videoRef.nativeElement.videoHeight;
+      }, 500);
+    });
+  }
+
+  takePhoto() {
+    const canvas = this.canvasRef.nativeElement as HTMLCanvasElement;
+    const video = this.videoRef.nativeElement as HTMLVideoElement;
+    const context = canvas.getContext('2d');
+
+    if (!context) {
+      console.error("No se pudo obtener el contexto del canvas.");
+      return;
+    }
+
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageDataUrl = canvas.toDataURL('image/png');
+
+    Swal.fire({
+      title: '¿La imagen capturada es correcta?',
+      imageUrl: imageDataUrl,
+      imageAlt: 'Imagen capturada',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, guardar',
+      cancelButtonText: 'No, repetir',
+      reverseButtons: true,
+      width: 600
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.capturedImage = imageDataUrl;
+
+        Swal.fire({
+          icon: 'success',
+          title: '¡Imagen guardada!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+        const modal = document.getElementById('modalCamara');
+        if (modal) {
+          const modalInstance = (window as any).bootstrap?.Modal.getInstance(modal);
+          modalInstance?.hide();
+          modalInstance?.dispose();  // 👈 Destruye completamente la instancia
+        }
+
+
+      } else {
+        this.capturedImage = '';
+      }
+    });
+  }
+
+  stopCamera() {
+    const stream = this.videoRef.nativeElement.srcObject as MediaStream;
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+    }
+    this.videoRef.nativeElement.srcObject = null;
+    this.marcoVisible = false;
+  }
+
 }
