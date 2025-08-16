@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { NavbarUsuario } from '../../components/navbar-usuario/navbar-usuario';
 import { Carrousel } from '../../components/carrousel/carrousel';
 import { Footer } from '../../components/footer/footer';
+import { Chatbot } from '../../components/chatbot/chatbot';
 @Component({
   selector: 'app-usuario',
-  imports: [NavbarUsuario, Carrousel, Footer],
+  imports: [NavbarUsuario, Carrousel, Footer, Chatbot],
   templateUrl: './usuario.html',
   styleUrl: './usuario.css'
 })

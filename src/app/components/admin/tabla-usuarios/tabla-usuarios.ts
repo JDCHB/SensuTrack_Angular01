@@ -50,7 +50,7 @@ export class TablaUsuarios implements OnInit {
 
     this.usuarioService.getUsers().subscribe({
       next: (response) => {
-        console.log('Respuesta del backend:', response); // 👈 Añade esto
+        console.log('Respuesta del backend:', response);
         this.todos = response.resultado;
         setTimeout(() => {
           ($('#myTable') as any).DataTable();
